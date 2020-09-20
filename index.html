@@ -290,7 +290,7 @@
 			<div class="l-box-lrg pure-u-1 pure-u-md-3-5">
 				<h4>REST</h4>
 				<p>Для детального знакомства с запросами можно импортировать Postman коллекцию при помощи JSON файла.
-					<br/>Можно скачать <b><a href="https://github.com/aguaBrillante/demotesting/blob/master/postman/DEMOTESTING.postman_collection.json" class="dark_link">его</a></b> с моего Github аккаунта.
+					<br/>Можно <b><a href="https://github.com/aguaBrillante/demotesting/blob/master/postman/DEMOTESTING.postman_collection.json" class="dark_link">скачать его</a></b> с моего Github аккаунта.
 					<p> Для Postman развёрнута тестовая копия реальной базы (СУБД - PostgreSQL). Проверяются ответы сервера на основе тела запроса. Тело POST запроса - это текст sql запроса для базы данных. Тело ответа - это текстовый ответ, который генерирует php на сервере на основе ответа от БД. Такая модель представляет упрощенную имитацию RESTful API.
 						<br/>Для каждой формы запускается один POST запрос в трёх итерациях.
 						<ul>
@@ -308,7 +308,7 @@
 "insert into registration ("login","password","email") 
 values ('{{regLogin}}','{{regPswd}}','{{regEmail}}');"
 </pre>
-					<p> Пример данных для итерирования можно посмотреть <b><a href="http://demotesting.space/postman/data.json" class="dark_link">по ссылке.</a></b></p>
+					<p> Пример данных для итерирования можно посмотреть <b><a href="https://github.com/aguaBrillante/demotesting/blob/master/postman/data.json" class="dark_link">по ссылке.</a></b></p>
 					<p> Таким образом каждая итерация со своим набором данных приводит к определнному ответу с сервера. Ответ в каждой итерации тестируется во вкладке "tests". Т.к. при каждой итерации приходит свой ответ - проводятся условные тесты, в зависимости от номера итерации. Пример тестов, группированных по итерациям: </p> 
 <pre>
 if(pm.iterationData.get("iteration")===1){
