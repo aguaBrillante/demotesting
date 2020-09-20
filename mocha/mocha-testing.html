@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<!-- подключаем стили Mocha, для отображения результатов -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css">
+	<!-- подключаем библиотеку Mocha -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.js"></script>
+	<!-- настраиваем Mocha: предстоит BDD-тестирование -->
+	<script>
+	mocha.setup('bdd');
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ajv/6.12.5/ajv.min.js"></script>
+	<!-- подключаем chai -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/chai/2.0.0/chai.js"></script>
+	<!-- в chai есть много всего, выносим assert в глобальную область -->
+	<script>
+	var assert = chai.assert;
+	var expect = chai.expect;
+	</script>
+</head>
+
+<body>
+	<form id="mock_form1" onsubmit="return false" class="pure-form pure-form-stacked" style="display:none">
+		<fieldset>
+			<label for="name1">Логин</label>
+			<input id="name1q" class="input_login" type="text" placeholder="Ваш логин">
+			<label for="email1">Email</label>
+			<input id="email11" class="input_email" type="text" placeholder="Ваш email">
+			<label for="pswd1">Пароль</label>
+			<input id="pswd1" class="input_pswd" type="password" placeholder="Ваш пароль">
+			<button id="but1" onclick="return pressSubmit()" class="pure-button">Зарегистрировать</button>
+		</fieldset><span class="submit_msg faded_elem"></span> </form>
+	<form id="mock_form2" onsubmit="return false" class="pure-form pure-form-stacked" style="display:none">
+		<fieldset>
+			<label for="name3">Логин</label>
+			<input id="name3" class="input_login" type="text" placeholder="Ваш логин">
+			<label for="pswd3">Пароль</label>
+			<input id="pswd3" class="input_pswd" type="password" placeholder="Ваш пароль">
+			<div class="questions_container">
+				<!--Questions inserts JS-->
+				<label for="question1">1. Меня раздражают, когда другие люди ошибаются:</label>
+				<p>Да
+					<input type="radio" id="question1_1" name="question1" value="1" class="input_question"> Нет
+					<input type="radio" id="question1_0" name="question1" value="0" class="input_question"> </p>
+				<label for="question2">2. Я могу напомнить приятелю о долге:</label>
+				<p> Да
+					<input type="radio" id="question2_1" name="question2" value="1" class="input_question"> Нет
+					<input type="radio" id="question2_0" name="question2" value="0" class="input_question">
+				</p>
+				<label for="question3">3. Лучше говорить правду, но не всегда всю правду:</label>
+				<p> Да
+					<input type="radio" id="question3_1" name="question3" value="1" class="input_question"> Нет
+					<input type="radio" id="question3_0" name="question3" value="0" class="input_question">
+				</p>
+				<label for="question4">4. Я в состоянии позаботится о себе сам:</label>
+				<p> Да
+					<input type="radio" id="question4_1" name="question4" value="1" class="input_question"> Нет
+					<input type="radio" id="question4_0" name="question4" value="0" class="input_question">
+				</p>
+				<label for="question5">5. Иногда можно проехать "зайцем":</label>
+				<p> Да
+					<input type="radio" id="question5_1" name="question5" value="1" class="input_question"> Нет
+					<input type="radio" id="question5_0" name="question5" value="0" class="input_question">
+				</p>
+				<label for="question6">6. Соперничество лучше сотрудничества:</label>
+				<p> Да
+					<input type="radio" id="question6_1" name="question6" value="1" class="input_question"> Нет
+					<input type="radio" id="question6_0" name="question6" value="0" class="input_question">
+				</p>
+				<label for="question7">7. Я часто переживаю по пустякам:</label>
+				<p> Да
+					<input type="radio" id="question7_1" name="question7" value="1" class="input_question"> Нет
+					<input type="radio" id="question7_0" name="question7" value="0" class="input_question">
+				</p>
+				<label for="question8">8. Я человек самостоятельный и достаточно решительный:</label>
+				<p> Да
+					<input type="radio" id="question8_1" name="question8" value="1" class="input_question"> Нет
+					<input type="radio" id="question8_0" name="question8" value="0" class="input_question">
+				</p>
+				<label for="question9">9. Я люблю всех, кого знаю:</label>
+				<p> Да
+					<input type="radio" id="question9_1" name="question9" value="1" class="input_question"> Нет
+					<input type="radio" id="question9_0" name="question9" value="0" class="input_question">
+				</p>
+				<label for="question10">10. Я верю в себя. У меня хватит сил, чтобы справиться с текущими задачами:</label>
+				<p> Да
+					<input type="radio" id="question10_1" name="question10" value="1" class="input_question"> Нет
+					<input type="radio" id="question10_0" name="question10" value="0" class="input_question">
+				</p>
+				<label for="question11">11. Ничего не поделаешь, человек всегда должен быть начеку, чтобы суметь защитить свои интересы:</label>
+				<p> Да
+					<input type="radio" id="question11_1" name="question11" value="1" class="input_question"> Нет
+					<input type="radio" id="question11_0" name="question11" value="0" class="input_question">
+				</p>
+				<label for="question12">12. Я никогда не смеюсь над неприличными шутками:</label>
+				<p> Да
+					<input type="radio" id="question12_1" name="question12" value="1" class="input_question"> Нет
+					<input type="radio" id="question12_0" name="question12" value="0" class="input_question"> </p>
+				<label for="question13">13. Я признаю авторитеты и уважаю их:</label>
+				<p> Да
+					<input type="radio" id="question13_1" name="question13" value="1" class="input_question"> Нет
+					<input type="radio" id="question13_0" name="question13" value="0" class="input_question">
+				</p>
+				<label for="question14">14. Я никогда не позволяю давить на себя. Я заявляю протест:</label>
+				<p> Да
+					<input type="radio" id="question14_1" name="question14" value="1" class="input_question"> Нет
+					<input type="radio" id="question14_0" name="question14" value="0" class="input_question">
+				</p>
+				<label for="question15">15. Я поддерживаю любое полезное начинание:</label>
+				<p> Да
+					<input type="radio" id="question15_1" name="question15" value="1" class="input_question"> Нет
+					<input type="radio" id="question15_0" name="question15" value="0" class="input_question">
+				</p>
+				<label for="question16">16. Я всегда говорю правду:</label>
+				<p> а
+					<input type="radio" id="question16_1" name="question16" value="1" class="input_question"> Нет
+					<input type="radio" id="question16_0" name="question16" value="0" class="input_question">
+				</p>
+				<label for="question17">17. Я практичный человек:</label>
+				<p> Да
+					<input type="radio" id="question17_1" name="question17" value="1" class="input_question"> Нет
+					<input type="radio" id="question17_0" name="question17" value="0" class="input_question">
+				</p>
+				<label for="question18">18. Меня угнетает лишь факт того, что я могу потерпеть неудачу:</label>
+				<p> Да
+					<input type="radio" id="question18_1" name="question18" value="1" class="input_question"> Нет
+					<input type="radio" id="question18_0" name="question18" value="0" class="input_question">
+				</p>
+				<label for="question19">19. Я согласен с изречением: «Руку помощи ищи прежде всего у собственного плеча»:</label>
+				<p> Да
+					<input type="radio" id="question19_1" name="question19" value="1" class="input_question"> Нет
+					<input type="radio" id="question19_0" name="question19" value="0" class="input_question">
+				</p>
+				<label for="question20">20. Друзья оказывают на меня большое влияние:</label>
+				<p> Да
+					<input type="radio" id="question20_1" name="question20" value="1" class="input_question"> Нет
+					<input type="radio" id="question20_0" name="question20" value="0" class="input_question">
+				</p>
+				<label for="question21">21. Я всегда прав, даже если другие считают иначе:</label>
+				<p> Да
+					<input type="radio" id="question21_1" name="question21" value="1" class="input_question"> Нет
+					<input type="radio" id="question21_0" name="question21" value="0" class="input_question">
+				</p>
+				<label for="question22">22. Я согласен с тем, что важен не результат, а процесс:</label>
+				<p> Да
+					<input type="radio" id="question22_1" name="question22" value="1" class="input_question"> Нет
+					<input type="radio" id="question22_0" name="question22" value="0" class="input_question">
+				</p>
+				<label for="question23">23. Прежде чем что-либо сделать, хорошенько подумаю, как это воспримут другие:</label>
+				<p> Да
+					<input type="radio" id="question23_1" name="question23" value="1" class="input_question"> Нет
+					<input type="radio" id="question23_0" name="question23" value="0" class="input_question">
+				</p>
+				<label for="question24">24. Я никогда никому не завидую:</label>
+				<p> Да
+					<input type="radio" id="question24_1" name="question24" value="1" class="input_question"> Нет
+					<input type="radio" id="question24_0" name="question24" value="0" class="input_question">
+				</p>
+			</div>
+			<button id="but3" onclick="return pressSubmit()" class="pure-button">Отправить ответы</button>
+		</fieldset><span class="submit_msg faded_elem">Ответы обработаны, смотрите интерпретацию рядом с формой</span> </form>
+	<form id="mock_form3" onsubmit="return false" class="pure-form pure-form-stacked" style="display:none"> </form>
+	<script src="../lodash.js"></script>
+	<script src="../script.js"></script>
+	<script src="test.js"></script>
+	<!-- в элементе с id="mocha" будут результаты тестов -->
+	<div id="mocha"></div>
+	<script>
+	mocha.run();
+	</script>
+</body>
+
+</html>
