@@ -100,7 +100,6 @@ function FormObj ()  {
 			tableUpdatePG:{enumerable: false, writable: true, configurable:true},
 			validationErrorMsg:{enumerable: false, writable: true, configurable:true},
 			goPost: {value: false, enumerable: false, writable: true,configurable:true},
-			//fetchSuccess: {value: false, enumerable: false, writable: true,configurable:true},
 			updatePG: { enumerable: false, writable: true, configurable:true},
 			sqlStatement: {enumerable: false, writable: true, configurable:true},
 			url: {enumerable: false, writable: true, configurable:true},
